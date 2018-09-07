@@ -40,7 +40,7 @@ else
 	echo "Conversion Success!"
 	echo "/tmp/$dir$out"
 	# Email
-	curl -H 'Content-Type:multipart/form-data' -s --user "api:$key" https://api.mailgun.net/v3/$domain/messages -F from="Postmaster <postmaster@$domain>" -F to="User <$address>" -F subject='Exciting Subject' -F text='Body' -F attachment=@/tmp/$dir/$out
+	curl -H 'Content-Type:multipart/form-data' -s --user "api:$key" https://api.mailgun.net/v3/$domain/messages -F from="ick <postmaster@$domain>" -F to="User <$address>" -F subject="Incoming! $out" -F text="$out" -F attachment=@/tmp/$dir/$out
 	# Cleanup
 	#rm -rf $dir
 	#rm -rf /tmp/$dir/
