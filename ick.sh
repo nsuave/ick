@@ -10,7 +10,7 @@ ext=".pdf"
 convertResult=0
 out=""
 
-dir=`python /imgchap/imgchap.py $baseDomain $series $type`
+dir=`python /ick/ick.py $baseDomain $series $type`
 
 if [ $? -ne 0 ]; then
 	echo "Error:"
