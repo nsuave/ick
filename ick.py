@@ -1,3 +1,5 @@
+#!/usr/local/bin/python3
+
 from bs4 import BeautifulSoup
 from collections import OrderedDict
 import requests
@@ -91,11 +93,11 @@ directory = series + "_" + latestChapterNumber + "/"
 
 # But first, check to see if it already exists
 if os.path.exists(directory) == True:
-    print "Directory " + directory + " already exists!"
+    print("Directory " + directory + " already exists!")
     exit(1)
 else:
     os.mkdir(directory)
-    print directory
+    print(directory)
 
 for url in imageURLS:
     r = requests.get(url)
