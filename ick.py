@@ -127,6 +127,7 @@ for image in sorted(os.listdir(directory)):
     pdf.add_page()
     pdf.image(directory + image, w=185)
 pdf.output(convertedFile, "F")
+print(convertedFile)
 
 ###
 ### EMAIL
@@ -146,3 +147,11 @@ mailRequest = requests.post(
 
 print(mailRequest.status_code)
 print(mailRequest.text)
+
+##
+## CLEANUP
+##
+
+cleanup = "rm -r " + directory + " && rm " + convertedFile
+print(cleanup)
+os.system(cleanup)
