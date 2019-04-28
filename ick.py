@@ -94,7 +94,7 @@ latestChapterNumber = latestChapter[latestChapter.rfind("/")-8:]
 latestChapterNumber = latestChapterNumber[:3]
 
 # Create directory based on series and chapter number
-directory = series + "_" + latestChapterNumber + "/"
+directory = "/tmp/" + series + "_" + latestChapterNumber + "/"
 
 # But first, check to see if it already exists
 if os.path.exists(directory) == True:
@@ -118,8 +118,8 @@ for url in imageURLS:
 ### CREATE PDF
 ###
 
-# File name setup
-convertedFile = directory.strip("/") + ".pdf"
+# PDF file name setup, stripping trailing slash
+convertedFile = directory.rstrip("/") + ".pdf"
 
 # Sorting images and creating a pdf with static width
 pdf = FPDF()
