@@ -10,6 +10,10 @@ import sys
 baseDomain = sys.argv[1]
 series = sys.argv[2]
 domain = baseDomain + "/" + sys.argv[3] + "/"
+mailKey = sys.argv[4]
+mailSandbox = sys.argv[5]
+mailRecipient = sys.argv[6]
+mailUrl = "https://api.mailgun.net/v3/" + mailSandbox + "/messages"
 
 ###
 ### FIND LATEST CHAPTER FROM ALL AVAILABLE CHAPTERS
@@ -117,6 +121,7 @@ for url in imageURLS:
 # File name setup
 convertedFile = directory.strip("/") + ".pdf"
 
+# Sorting images and creating a pdf with static width
 pdf = FPDF()
 for image in sorted(os.listdir(directory)):
     pdf.add_page()
@@ -126,3 +131,18 @@ pdf.output(convertedFile, "F")
 ###
 ### EMAIL
 ###
+
+mailRequest = requests.post(
+    mailUrl, 
+    auth=("api", mailKey),  
+    data={
+        "from": "postmaster@" + mailSandbox,
+        "to": mailRecipient,
+        "subject": "Incoming!",
+        "text": convertedFile
+    },
+    files={"attachment": (convertedFile, open(convertedFile, "rb"))},
+)
+
+print(mailRequest.status_code)
+print(mailRequest.text)
