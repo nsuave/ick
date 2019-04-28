@@ -2,6 +2,7 @@
 
 from bs4 import BeautifulSoup
 from collections import OrderedDict
+from fpdf import FPDF
 import requests
 import os
 import sys
@@ -108,3 +109,20 @@ for url in imageURLS:
     if r.status_code == 200:
         with open(directory + filename,'wb') as f:
             f.write(r.content)
+
+###
+### CREATE PDF
+###
+
+# File name setup
+convertedFile = directory.strip("/") + ".pdf"
+
+pdf = FPDF()
+for image in sorted(os.listdir(directory)):
+    pdf.add_page()
+    pdf.image(directory + image, w=185)
+pdf.output(convertedFile, "F")
+
+###
+### EMAIL
+###
