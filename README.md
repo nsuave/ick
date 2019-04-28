@@ -1,6 +1,6 @@
 Docker Usage:
 ```
-docker exec -d ick /ick/ick.sh $baseDomain $series $type $key $domain $address
+docker exec -d ick python3 /ick/ick.py $baseDomain $series $type $key $domain $address
 ```
 
 Python Usage:
